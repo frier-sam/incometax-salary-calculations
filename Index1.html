@@ -1,0 +1,133 @@
+<head>
+
+	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="/data.js"></script>
+</head>
+
+
+
+<body style="background-color: #d2dad9;">
+	<nav class="navbar navbar-dark bg-dark">
+  	<a class="navbar-brand" href="#">Income tax and salary calculation - INDIA</a>
+	</nav>
+
+	<div class="row">
+		<div class="col-12 text-center">
+			<h4>Annual Income Vs Income Tax</h4>
+		</div>
+		<div class="col-12">
+			<div class='col-md-10 offset-md-1' id='taxplot'></div>
+			<div class='col-md-8 offset-md-2 text-left'>
+				<h5 class='text-center'>CALCULATION :<strong> Total Tax = Tax based on Taxable Income + Cess + Surcharge</strong> </h5>
+				<ul>
+					<li><strong>Taxable Income</strong> : Total salary(salary + bonuses + variable) + External Income - 50,000INR(standard deductions)</li>
+				  <li><strong>Tax</strong> : Tax calculated using <a href='https://cleartax.in/s/income-tax-slabs' target='_blank'>new regime</a> </li>
+				  <li><strong>Cess</strong> : 4% of  income tax</li>
+					<li><strong>Surcharge</strong> : Surcharges on income tax if taxable income exceeds 50lakhs per annum</li>
+				</ul>
+				<a href='https://gist.github.com/frier-sam/629b12604b1fdce4b38eea692bcdb8d8' target="_blank">Python Script Used For This</a>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-12 text-center">
+			<h4>CTC vs Monthly Inhand Salary</h4>
+		</div>
+		<div class="col-12">
+				<div class='col-md-10 offset-md-1'  id='inhandplot'></div>
+				<div class='col-md-8 offset-md-2 text-left'>
+					<h5 class='text-center'>CALCULATION : <strong>Monthly Inhand Salary = CTC - Provident Fund - Income Tax / 12</strong> </h5>
+					<ul>
+						<li><strong>CTC</strong> : Cost To Company</li>
+					  <li><strong>Provident Fund</strong> : 10 - 12% of <strong>Basic Component</strong> (Taken as 11%) </li>
+					  <li><strong>Basic Component</strong> : Generally 40 - 50% of CTC (Taken as 50%)</li>
+						<li><strong>Income Tax</strong> : Tax Calculated Using above method</li>
+					</ul>
+					<a href='https://gist.github.com/frier-sam/3e429b1266a5311a0be693a7e63fd7fb' target="_blank">Python Script Used For This</a>
+				</div>
+		</div>
+
+	</div>
+	<hr>
+	<div class="col-12 text-center">
+		<h6>Created By <a href='https://github.com/frier-sam' target='_blank'>frier-sam</a></h6>
+	</div>
+	<hr>
+
+
+
+
+  <script>
+
+		var inhand = {
+      
+		  x: inhand_x,
+      y: inhand_y,
+      type: 'scatter'
+		};
+
+
+		var tax = {
+      
+	  x: tax_x,
+    y: tax_y,
+    type: 'scatter'
+	};
+	
+	var config = {responsive: true}
+	 
+	var salarylayout = {
+		xaxis: {
+			title: {
+				text: 'CTC in lakhs',
+				font: {
+					family: 'Courier New, monospace',
+					size: 18,
+					color: '#7f7f7f'
+				}
+			},
+		},
+		yaxis: {
+			title: {
+				text: 'Monthly salary in lakhs',
+				font: {
+					family: 'Courier New, monospace',
+					size: 18,
+					color: '#7f7f7f'
+				}
+			}
+		}
+	};
+	var taxlayout = {
+	  xaxis: {
+	    title: {
+	      text: 'Taxable income in lakhs',
+	      font: {
+	        family: 'Courier New, monospace',
+	        size: 18,
+	        color: '#7f7f7f'
+	      }
+	    },
+	  },
+	  yaxis: {
+	    title: {
+	      text: 'Income Tax in lakhs',
+	      font: {
+	        family: 'Courier New, monospace',
+	        size: 18,
+	        color: '#7f7f7f'
+	      }
+	    }
+	  }
+	};
+
+
+	var taxchart = [tax];
+	var inhandchart =[inhand]
+
+	Plotly.newPlot('taxplot', taxchart,taxlayout,config);
+	Plotly.newPlot('inhandplot', inhandchart,salarylayout,config);
+</script>
+</body>

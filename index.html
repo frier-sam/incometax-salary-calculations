@@ -15,12 +15,16 @@
 	  	</a>
 	</nav>
 
-	<div class="row">
+	<div class="row container-fluid">
 		<div class="col-12 text-center">
 			<h4>Annual Income Vs Income Tax</h4>
 		</div>
 		<div class="col-12">
-			<div class='col-md-10 offset-md-1' id='taxplot'></div>
+			<div class="card mb-3" style="width: 100%;">
+			  <div class="card-body">
+			    <div class='col-md-10 offset-md-1' id='taxplot'></div>
+			  </div>
+			</div>
 			<div class='col-md-8 offset-md-2 text-left'>
 				<h5 class='text-center'>CALCULATION :<strong> Total Tax = Tax based on Taxable Income + Cess + Surcharge</strong> </h5>
 				<ul>
@@ -39,7 +43,11 @@
 			<h4>CTC vs Monthly Inhand Salary</h4>
 		</div>
 		<div class="col-12">
-				<div class='col-md-10 offset-md-1'  id='inhandplot'></div>
+				<div class="card mb-3" style="width: 100%;">
+				  <div class="card-body">
+				    <div class='col-md-10 offset-md-1' id='inhandplot'></div>
+				  </div>
+				</div>
 				<div class='col-md-8 offset-md-2 text-left'>
 					<h5 class='text-center'>CALCULATION : <strong>Monthly Inhand Salary = CTC - Provident Fund - Income Tax / 12</strong> </h5>
 					<ul>
@@ -130,7 +138,7 @@
 	var taxchart = [tax];
 	var inhandchart =[inhand]
 
-	Plotly.newPlot('taxplot', taxchart,taxlayout,config);
-	Plotly.newPlot('inhandplot', inhandchart,salarylayout,config);
+	Plotly.newPlot('taxplot', taxchart, { ...taxlayout, autosize: true }, config);
+	Plotly.newPlot('inhandplot', inhandchart, { ...salarylayout, autosize: true }, config);
 </script>
 </body>
